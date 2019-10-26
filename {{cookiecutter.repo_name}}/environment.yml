@@ -1,0 +1,30 @@
+name: {{cookiecutter.package_name}}
+
+channels:
+  - pytorch
+  - conda-forge
+
+dependencies:
+  - python=3.7
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - pytest
+  - flake8
+  - rope
+  - autopep8
+  - click
+  - jupyter
+  - pyyaml
+  - pytorch>=1.1.0
+  - torchvision
+  - cudatoolkit=10.0
+  - tensorflow
+  - tensorboard>=1.14
+  - absl-py
+  - future
+  - tqdm
+  - pip
+  - pip:
+    - -e .  # install package in development mode
