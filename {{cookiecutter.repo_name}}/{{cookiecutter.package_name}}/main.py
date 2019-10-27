@@ -61,9 +61,6 @@ class Runner:
         trainer.train()
         self.logger.info('Finished!')
 
-        trainer.train()
-        self.logger.info('Finished!')
-
     # -- helpers ----------------------------------------------------------------------------------
 
     def setup_device(
