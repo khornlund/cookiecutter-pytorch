@@ -4,12 +4,10 @@ from typing import Any, List, Tuple
 from types import ModuleType
 
 import numpy as np
-import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as module_optimizer
 import torch.optim.lr_scheduler as module_scheduler
-from tqdm import tqdm
 
 import {{ cookiecutter.package_name }}.data_loader.augmentation as module_aug
 import {{ cookiecutter.package_name }}.data_loader.data_loaders as module_data
