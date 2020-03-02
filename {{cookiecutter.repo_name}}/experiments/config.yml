@@ -1,12 +1,11 @@
-short_name: Mnist_LeNet
+name: Mnist_LeNet
 save_dir: saved/
 seed: 1234
 target_devices: [0]
 
 arch:
   type: MnistModel
-  args:
-    verbose: 2
+  args: {}
 
 augmentation:
   type: MNISTTransforms
@@ -45,4 +44,3 @@ training:
   monitor: min val_loss
   save_period: 1
   tensorboard: true
-  verbose: 2

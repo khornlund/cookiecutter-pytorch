@@ -5,7 +5,7 @@ channels:
   - conda-forge
 
 dependencies:
-  - python=3.7
+  - python=3.8
   - numpy
   - scipy
   - matplotlib
@@ -14,6 +14,7 @@ dependencies:
   - flake8
   - rope
   - autopep8
+  - black
   - click
   - jupyter
   - pyyaml

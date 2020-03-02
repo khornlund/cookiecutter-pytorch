@@ -73,15 +73,14 @@ Config files are in `.yml` format:
 
 .. code-block:: HTML
 
-  short_name: Mnist_LeNet
+  name: Mnist_LeNet
   n_gpu: 1
   save_dir: saved/
   seed: 1234
 
   arch:
     type: MnistModel
-    args:
-      verbose: 2
+    args: {}
 
   data_loader:
     type: MnistDataLoader
@@ -116,13 +115,11 @@ Config files are in `.yml` format:
     monitor: min val_loss
     save_period: 1
     tensorboard: true
-    verbose: 2
 
   testing:
     data_dir: data/
     batch_size: 128
     num_workers: 8
-    verbose: 2
 
 
 Add addional configurations if you need.

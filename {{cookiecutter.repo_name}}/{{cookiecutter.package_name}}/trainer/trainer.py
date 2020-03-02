@@ -3,6 +3,10 @@ import torch
 from torchvision.utils import make_grid
 
 from {{ cookiecutter.package_name }}.base import TrainerBase, AverageMeter
+from {{ cookiecutter.package_name }}.utils import setup_logger
+
+
+log = setup_logger(__name__)
 
 
 class Trainer(TrainerBase):
@@ -67,26 +71,26 @@ class Trainer(TrainerBase):
         for mtr in metric_mtrs:
             self.writer.add_scalar(f'epoch/{mtr.name}', mtr.avg)
 
-        log = {
+        results = {
             'loss': loss_mtr.avg,
             'metrics': [mtr.avg for mtr in metric_mtrs]
         }
 
         if self.do_validation:
-            val_log = self._valid_epoch(epoch)
-            log = {**log, **val_log}
+            val_results = self._valid_epoch(epoch)
+            results = {**results, **val_results}
 
         if self.lr_scheduler is not None:
             self.lr_scheduler.step()
 
-        return log
+        return results
 
     def _log_batch(self, epoch, batch_idx, batch_size, len_data, loss):
         n_samples = batch_size * len_data
         n_complete = batch_idx * batch_size
         percent = 100.0 * batch_idx / len_data
         msg = f'Train Epoch: {epoch} [{n_complete}/{n_samples} ({percent:.0f}%)] Loss: {loss:.6f}'
-        self.logger.debug(msg)
+        log.debug(msg)
 
     def _eval_metrics(self, output, target):
         with torch.no_grad():

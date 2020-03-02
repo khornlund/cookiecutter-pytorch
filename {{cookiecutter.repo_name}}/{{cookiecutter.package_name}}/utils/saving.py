@@ -2,9 +2,9 @@ from pathlib import Path
 import datetime
 
 
-LOG_DIR = 'logs'
-CHECKPOINT_DIR = 'checkpoints'
-RUN_DIR = 'runs'
+LOG_DIR = "logs"
+CHECKPOINT_DIR = "checkpoints"
+RUN_DIR = "runs"
 
 
 def ensure_exists(p: Path) -> Path:
@@ -20,12 +20,12 @@ def arch_path(config: dict) -> Path:
     """
     Construct a path based on the name of a configuration file eg. 'saved/EfficientNet'
     """
-    p = Path(config['save_dir']) / config['name']
+    p = Path(config["save_dir"]) / config["name"]
     return ensure_exists(p)
 
 
 def arch_datetime_path(config: dict) -> Path:
-    start_time = datetime.datetime.now().strftime('%m%d-%H%M%S')
+    start_time = datetime.datetime.now().strftime("%m%d-%H%M%S")
     p = arch_path(config) / start_time
     return ensure_exists(p)
 
@@ -47,5 +47,5 @@ def trainer_paths(config: dict) -> Path:
     arch_datetime = arch_datetime_path(config)
     return (
         ensure_exists(arch_datetime / CHECKPOINT_DIR),
-        ensure_exists(arch_datetime / RUN_DIR)
+        ensure_exists(arch_datetime / RUN_DIR),
     )

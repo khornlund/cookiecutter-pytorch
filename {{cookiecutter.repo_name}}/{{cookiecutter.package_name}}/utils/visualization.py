@@ -1,26 +1,35 @@
 try:
     from torch.utils.tensorboard import SummaryWriter
 except ImportError:
-    raise ImportError('Import `from torch.utils.tensorboard import SummaryWriter` failed.'
-                      'Ensure PyTorch version >= 1.1 and Tensorboard > 1.14 are installed.')
+    raise ImportError(
+        "Import `from torch.utils.tensorboard import SummaryWriter` failed."
+        "Ensure PyTorch version >= 1.1 and Tensorboard > 1.14 are installed."
+    )
 
 
-class TensorboardWriter():
+class TensorboardWriter:
     def __init__(self, writer_dir, enabled):
         self.writer = None
         if enabled:
             self.writer = SummaryWriter(writer_dir)
 
         self.step = 0
-        self.mode = ''
+        self.mode = ""
 
         self.tb_writer_ftns = [
-            'add_scalar', 'add_scalars', 'add_image', 'add_images', 'add_audio',
-            'add_text', 'add_histogram', 'add_pr_curve', 'add_embedding'
+            "add_scalar",
+            "add_scalars",
+            "add_image",
+            "add_images",
+            "add_audio",
+            "add_text",
+            "add_histogram",
+            "add_pr_curve",
+            "add_embedding",
         ]
-        self.tag_mode_exceptions = ['add_histogram', 'add_embedding']
+        self.tag_mode_exceptions = ["add_histogram", "add_embedding"]
 
-    def set_step(self, step, mode='train'):
+    def set_step(self, step, mode="train"):
         self.mode = mode
         self.step = step
 
@@ -38,13 +47,16 @@ class TensorboardWriter():
                 if add_data is not None:
                     # add mode(train/valid) tag
                     if name not in self.tag_mode_exceptions:
-                        tag = f'{self.mode}/{tag}'
+                        tag = f"{self.mode}/{tag}"
                     add_data(tag, data, self.step, *args, **kwargs)
+
             return wrapper
         else:
             # default action for returning methods defined in this class, set_step() for instance.
             try:
                 attr = object.__getattr__(name)
             except AttributeError:
-                raise AttributeError(f"type object `TensorboardWriter` has no attribute {name}")
+                raise AttributeError(
+                    f"type object `TensorboardWriter` has no attribute {name}"
+                )
             return attr
