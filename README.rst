@@ -9,7 +9,7 @@ A `Cookiecutter <https://github.com/audreyr/cookiecutter>`_ template for PyTorch
 
 Requirements
 ============
-* Python >= 3.7
+* Python >= 3.8
 * PyTorch >= 1.1
 * Tensorboard >= 1.4
 
@@ -43,6 +43,7 @@ Here are some projects which use this template:
 
 1. `Severstal Steel Defect Detection (Kaggle) <https://github.com/khornlund/severstal-steel-defect-detection>`_
 2. `Aptos Blindness Detection (Kaggle) <https://github.com/khornlund/aptos2019-blindness-detection>`_
+3. `Understanding Cloud Organization (Kaggle) <https://github.com/khornlund/understanding-cloud-organization>`_
 
 Custom Defaults
 ===============
