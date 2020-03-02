@@ -47,21 +47,21 @@ class TrainerBase:
             result = self._train_epoch(epoch)
 
             # save logged informations into log dict
-            log = {'epoch': epoch}
+            results = {'epoch': epoch}
             for key, value in result.items():
                 if key == 'metrics':
-                    log.update({
+                    results.update({
                         mtr.__name__: value[i] for i, mtr in enumerate(self.metrics)})
                 elif key == 'val_metrics':
-                    log.update({
+                    results.update({
                         'val_' + mtr.__name__: value[i] for
                         i, mtr in enumerate(self.metrics)
                     })
                 else:
-                    log[key] = value
+                    results[key] = value
 
             # print logged informations to the screen
-            for key, value in log.items():
+            for key, value in results.items():
                 log.info(f'{str(key):15s}: {value}')
 
             # evaluate model performance according to configured metric,
@@ -71,8 +71,8 @@ class TrainerBase:
                 try:
                     # check whether model performance improved or not, according
                     # to specified metric(mnt_metric)
-                    improved = (self.mnt_mode == 'min' and log[self.mnt_metric] < self.mnt_best) or\
-                               (self.mnt_mode == 'max' and log[self.mnt_metric] > self.mnt_best)
+                    improved = (self.mnt_mode == 'min' and results[self.mnt_metric] < self.mnt_best) or\
+                               (self.mnt_mode == 'max' and results[self.mnt_metric] > self.mnt_best)
                 except KeyError:
                     log.warning(f"Warning: Metric '{self.mnt_metric}' is not found. Model "
                                         "performance monitoring is disabled.")
@@ -81,7 +81,7 @@ class TrainerBase:
                     not_improved_count = 0
 
                 if improved:
-                    self.mnt_best = log[self.mnt_metric]
+                    self.mnt_best = results[self.mnt_metric]
                     not_improved_count = 0
                     best = True
                 else:

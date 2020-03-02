@@ -23,7 +23,7 @@ log = setup_logger(__name__)
 
 def train(cfg: Dict, resume: str) -> None:
     log.debug(f'Training: {cfg}')
-    seed_everything(config['seed'])
+    seed_everything(cfg['seed'])
 
     model = get_instance(module_arch, 'arch', cfg)
     model, device = setup_device(model, cfg['target_devices'])

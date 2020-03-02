@@ -1,7 +1,7 @@
 import click
 import yaml
 
-from {{ cookiecutter.package_name }}.main import train
+from {{ cookiecutter.package_name }} import main
 from {{ cookiecutter.package_name }}.utils import setup_logging
 
 
@@ -32,7 +32,7 @@ def train(config_filename, resume):
     configs = [load_config(f) for f in config_filename]
     for config in configs:
         setup_logging(config)
-        train(config, resume)
+        main.train(config, resume)
 
 
 def load_config(filename: str) -> dict:
