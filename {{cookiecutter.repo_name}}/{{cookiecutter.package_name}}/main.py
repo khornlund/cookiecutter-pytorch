@@ -89,7 +89,7 @@ def setup_device(
     log.info(f'Using devices {target_devices} of available devices {available_devices}')
     device = torch.device(f'cuda:{target_devices[0]}')
     if len(target_devices) > 1:
-        model = nn.DataParallel(model, device_ids=target_devices)
+        model = nn.DataParallel(model, device_ids=target_devices).to(device)
     else:
         model = model.to(device)
     return model, device
